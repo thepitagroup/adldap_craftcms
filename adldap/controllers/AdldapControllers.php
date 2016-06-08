@@ -8,7 +8,10 @@ class AdldapController extends BaseController
  
  	protected $allowAnonymous = true;
 
-
+        /**
+         * Method to Authenticate user trying to login.
+         * @throws \Adldap\Exceptions\Auth\BindException
+         */
         public function actionLogin()
         {
             $this->requirePostRequest();
@@ -18,7 +21,8 @@ class AdldapController extends BaseController
          
             $settings = craft()->plugins->getPlugin('adldap')->getSettings();
  
-          
+            $grphandle = $settings['group'];
+        
             $config = [
                 
                 "domain_controllers"=>[$settings['domainControllers']],
@@ -53,11 +57,14 @@ class AdldapController extends BaseController
 
                         $query = craft()->db->createCommand();
                         $result = $query->select('id')->from('users')->where(['username'=>$memberName])->queryRow();
-                       // var_dump($result);exit;
+                        
+                       // die("MB: ".$memberPassword);
+                        //var_dump($result);exit;
                         if($result === false){
+                            
                             $user = new UserModel;
-
                             $user->username  = $memberName;
+                            $user->password  = $memberPassword;
                             //echo "USERNAME: ".$memberName;
                             $email =$rec['email'][0];
                             //var_dump($rec['email'][0]);
@@ -96,8 +103,10 @@ class AdldapController extends BaseController
                             } catch(\Exception $e){
                                  throw $e;
                             }
-
-                            craft()->userGroups->assignUserToGroups($id, 1);
+                            $q2 = craft()->db->createCommand();
+                            $grp = $q2->select('id')->from('usergroups')->where(['handle'=>$grphandle])->queryRow();
+                            //var_dump($grp);exit;
+                            craft()->userGroups->assignUserToGroups($user->id, $grp['id']);
 
 
                             if (craft()->users->activateUser($user))
@@ -110,9 +119,12 @@ class AdldapController extends BaseController
                             }
                         }else {
                             $id = $result['id'];
+                            $user = craft()->users->getUserById( $id );
+                            $user->newPassword  = $memberPassword; //get password from post and submit it to get hashed 
+                            craft()->users->saveUser($user); //save user 
                         }
-                        craft()->userSession->loginByUserId($id,true);
-                        $this->redirectToPostedUrl();
+                        craft()->userSession->loginByUserId($id,true);//LOGIN AS CRAFT USER CORRESPONDING TO username
+                        $this->redirectToPostedUrl();//REDIRECT TO URL that the login from was called from.
 
                     } else {
                         // Credentials were incorrect.
@@ -135,13 +147,21 @@ class AdldapController extends BaseController
             }
 
         
-    }
-
+        }
+        /**
+         * Logout method return to home page with status QS
+         */
         public function actionLogout()
         {
             craft()->userSession->logout(false);
             $this->redirect('?status=logout');
         }
+        
+        /**
+         * Method to convert binary guid to string
+         * @param binary $guid form AD
+         * @return string
+         */
         
         private function _to_p_guid( $guid )
         {
