@@ -26,10 +26,13 @@ Plugin made for craft CMS 2.6.* to allow LDAP authentication on the FRONT-END of
 4.  The AdldapPlugin file has most of the config properties handled. I will after being installed create a form to             configure the setting needed to connect to ldap.
     
     The main element of this file are the:
+
     a.  init method which point to the autoload file created by composer.
+    
     b.  registerSiteRoutes method allows the developer to  change the route to the logout method in plugin. The default is     "adlogout".
 
 5.  The AdldapController file has the logic for the connection, authentication to the ldap. 
+    a.  The action of login in via ldap will create a CRAFT CMS user as well if the user does not exist, otherwise it will     update the password   
 
 
 
