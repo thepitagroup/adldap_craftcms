@@ -1,0 +1,101 @@
+{% import "_includes/forms" as forms %}
+<h3>REQUIRED:</h3>
+
+{{ forms.textField({
+    id: 'domainControllers',
+    name: 'domainControllers',
+    label: 'Domain Controllers' | t,
+    value: settings.domainControllers,
+    instructions: 'DC1.domain.local,DC2.domain.local'
+}) }}
+
+{{ forms.textField({
+    id: 'baseDN',
+    name: 'baseDN',
+    label: 'Base DN' | t,
+    value: settings.baseDN,
+    instructions: 'DC=domain,DC=local'
+}) }}
+
+
+{{ forms.textField({
+    id: 'username',
+    name: 'username',
+    label: 'Username' | t,
+    value: settings.username,
+    instructions: 'Username used to query the LDAP server' | t
+}) }}
+
+{{ forms.textField({
+    id: 'password',
+    name: 'password',
+    label: 'Password' | t,
+    value: settings.password,
+    instructions: 'Password used to query the LDAP server' | t
+}) }}
+<hr>
+<h3>OPTIONAL</h3>
+
+{{ forms.textField({
+    id: 'accountSuffix',
+    name: 'accountSuffix',
+    label: 'Account Suffix' | t,
+    value: settings.accountSuffix,
+    instructions: 'The @domain.local you want to use.' | t
+}) }}
+
+{{ forms.textField({
+    id: 'accountPrefix',
+    name: 'accountPrefix',
+    label: 'Account Prefix' | t,
+    value: settings.accountPrefix,
+    instructions: 'The prefix to the domain you want to use.' | t
+}) }}
+
+{{ forms.textField({
+    id: 'adminAccountSuffix',
+    name: 'adminAccountSuffix',
+    label: 'Admin Account Suffix' | t,
+    value: settings.adminAccountSuffix,
+    instructions: 'The @domain.local you want to use for admin connection' | t
+}) }}
+
+
+{{ forms.textField({
+    id: 'port',
+    name: 'port',
+    label: 'Port' | t,
+    value: settings.port,
+    instructions: 'Port used to query the LDAP server' | t
+}) }}
+
+
+
+{{ forms.lightswitchField({
+    id:"ssl",
+    label: 'Use SSL' | t,
+    instructions: 'Should we use SSL protocol to communicate to server' | t,
+    name: 'ssl',
+    on: settings.ssl,
+}) }}
+
+{{ forms.lightswitchField({
+    id:"tls",
+    label: 'Use TLS' | t,
+    instructions: 'Should we use TLS protocol to communicate to server' | t,
+    name: 'ssl',
+    on: settings.tls,
+}) }}
+{{ forms.lightswitchField({
+    id:"referrals",
+    label: 'Follow Referrals' | t,
+    instructions: 'Follow Referrals' | t,
+    name: 'referrals',
+    on: settings.referrals,
+}) }}
+
+
+
+
+
+
