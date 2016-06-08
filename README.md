@@ -37,7 +37,7 @@ Plugin made for craft CMS 2.6.* to allow LDAP authentication on the FRONT-END of
     
     b.  It pulls in the group handle that you set in the settings page and uses it to add to the login in user.
     
-    c.  It will then use that CRAFT CMS user and faked it as if the ldap user 
+    c.  It will then use that CRAFT CMS user and fake as if the ldap user is using that to login.
 
 
 
