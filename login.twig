@@ -1,0 +1,32 @@
+{% extends '_layout' %}
+
+{% block content %}
+    {% set redirect = craft.session.returnUrl  %}
+
+    {% if errorMessage is defined %}
+        <p>{{ errorMessage }}</p>
+    {% endif %}
+  <div class="container">  
+<form method="post" accept-charset="UTF-8">
+    {{ getCsrfInput() }} 
+    <input type="hidden" name="action" value="adldap/login">
+    <input type="hidden" name="redirect" value="{{redirect}}">
+    <div class="row">
+        <div class="col-xs-12 col-sm-6">
+            <label for="username">Username or email</label>
+            <input type="text" class="form-control" id="username" name="username">
+        </div>
+        <div class="col-xs-12 col-sm-6">
+            <label for="password">Password</label>
+            <input type="password" id="password" class="form-control" name="password">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-6">
+        <input type="submit" value="Login">
+        </div>
+    </div>
+    
+</form>
+  </div>
+{% endblock %}
