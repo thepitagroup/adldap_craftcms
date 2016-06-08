@@ -14,8 +14,10 @@ You can also change the name of the file to be whatever you want just make sure 
 
 The main element of that login.twig file are the 
 a.  {% set redirect = craft.session.returnUrl  %}
-b.  <input type="hidden" name="action" value="adldap/login"> <!-- this tells craft where to find the plugin/action -->
-    <input type="hidden" name="redirect" value="{{redirect}}"> <!-- this tells craft where to go back to once logged in -->
+
+b. <input type="hidden" name="action" value="adldap/login"> <!-- this tells craft where to find the plugin/action -->
+
+c. <input type="hidden" name="redirect" value="{{redirect}}"> <!-- this tells craft where to go back to once logged in -->
 
 3) Run composer.json found in the folder adldap which will create the vendor folders and files needed for the adldap2 library to function.
 
