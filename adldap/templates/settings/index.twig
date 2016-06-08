@@ -33,6 +33,15 @@
     value: settings.password,
     instructions: 'Password used to query the LDAP server' | t
 }) }}
+
+
+{{ forms.textField({
+    id:"group",
+    name:"group",
+    label:"Group Handle "| t,
+    instructions:"Please enter the handle of the CRAFT CMS group you want you LDAP user to belong to.",
+    values: settings.group
+}) }}
 <hr>
 <h3>OPTIONAL</h3>
 
@@ -68,7 +77,6 @@
     value: settings.port,
     instructions: 'Port used to query the LDAP server' | t
 }) }}
-
 
 
 {{ forms.lightswitchField({
