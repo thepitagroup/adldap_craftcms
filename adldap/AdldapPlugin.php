@@ -63,7 +63,7 @@ class AdldapPlugin extends BasePlugin
     protected function defineSettings()
     {
         return [
-           
+            "group"                 => AttributeType::String,
             "accountSuffix"         => AttributeType::String,
             "adminAccountSuffix"    => AttributeType::String,
             "accountPrefix"         => AttributeType::String,
