@@ -14,8 +14,8 @@ You can also change the name of the file to be whatever you want just make sure 
 
 The main element of that login.twig file are the 
 a.  {% set redirect = craft.session.returnUrl  %}
-'''html
-b. <pre><code><input type="hidden" name="action" value="adldap/login"></code></pre> <!-- this tells craft where to find the plugin/action -->
+
+b. '''<pre><code><input type="hidden" name="action" value="adldap/login"></code></pre>''' <!-- this tells craft where to find the plugin/action -->
 
 c. <code><input type="hidden" name="redirect" value="{{redirect}}"></code> <!-- this tells craft where to go back to once logged in -->
 
