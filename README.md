@@ -32,7 +32,12 @@ Plugin made for craft CMS 2.6.* to allow LDAP authentication on the FRONT-END of
     b.  registerSiteRoutes method allows the developer to  change the route to the logout method in plugin. The default is     "adlogout".
 
 5.  The AdldapController file has the logic for the connection, authentication to the ldap. 
-    a.  The action of login in via ldap will create a CRAFT CMS user as well if the user does not exist, otherwise it will     update the password   
+
+    a.  The action of login in via ldap will create a CRAFT CMS user as well if the user does not exist, otherwise it will     update the password.
+    
+    b.  It pulls in the group handle that you set in the settings page and uses it to add to the login in user.
+    
+    c.  It will then use that CRAFT CMS user and faked it as if the ldap user 
 
 
 
