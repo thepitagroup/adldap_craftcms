@@ -55,14 +55,14 @@ class AdldapPlugin extends BasePlugin
 
     public function getSettingsHtml()
     {
-        return craft()->templates->render('adldap/settings', array(
+        return craft()->templates->render('adldap/settings', [
             'settings' => $this->getSettings()
-        ));
+        ]);
     }
 
     protected function defineSettings()
     {
-        return array(
+        return [
            
             "accountSuffix"         => AttributeType::String,
             "adminAccountSuffix"    => AttributeType::String,
@@ -75,7 +75,7 @@ class AdldapPlugin extends BasePlugin
             "tls"                   => [AttributeType::Bool,'default'=>false],
             "referrals"             => [AttributeType::Bool,'default'=>false],
             "port"                  => [AttributeType::Number,'default'=>389],     
-        );
+        ];
     }
 
     public function registerSiteRoutes()
