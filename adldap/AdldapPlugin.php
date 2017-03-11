@@ -14,7 +14,7 @@ class AdldapPlugin extends BasePlugin
 
     public function getVersion()
     {
-        return '0.0.1';
+        return '0.0.2';
     }
 
     public function getSchemaVersion()
@@ -55,6 +55,8 @@ class AdldapPlugin extends BasePlugin
 
     public function getSettingsHtml()
     {
+        
+        //var_dump($this->getSettings());exit;
         return craft()->templates->render('adldap/settings', [
             'settings' => $this->getSettings()
         ]);
@@ -94,15 +96,19 @@ class AdldapPlugin extends BasePlugin
 
     public function onAfterInstall()
     {
-            craft()->plugins->savePluginSettings($this);
+        craft()->plugins->savePluginSettings($this,$this->getSettings());
         
     }
 
     public function init()
     {
          require_once (CRAFT_PLUGINS_PATH.'/adldap/vendor/autoload.php');
-         //AdldapPlugin::log('ADLDAP START');
     }
 
+    
+    public function prepSettings($settings)
+    {
+        return $settings;
+    }
 
 }
