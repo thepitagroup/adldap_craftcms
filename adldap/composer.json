@@ -1,4 +1,5 @@
 {
+    "name": "thepitagroup/adldap",
     "require": {
     "adldap2/adldap2": "6.0.*"
     }
